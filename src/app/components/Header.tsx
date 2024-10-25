@@ -1,25 +1,32 @@
-import React from 'react';
-import { Sun } from 'lucide-react';
-import Link from 'next/link';
+"use client";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { Sun } from "lucide-react";
 
-const Header: React.FC = () => {
+export default function Header() {
   return (
-    <header className="bg-blue-600 text-white p-4 w-full">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center">
-          <Sun className="mr-2" />
-          <h1 className="text-2xl font-bold">Solar Smart Energy</h1>
-        </div>
-        <nav>
-          <ul className="flex space-x-4">
-            {/* <li><Link href="/" className="hover:underline">Dashboard</Link></li> */}
-            {/* <li><Link href="/settings" className="hover:underline">Settings</Link></li>
-            <li><Link href="/profile" className="hover:underline">Profile</Link></li> */}
-          </ul>
+    <ClerkProvider>
+      <header className="bg-blue-600 text-white p-4 w-full">
+        <nav className="container mx-auto flex justify-between items-center">
+          <div className="flex items-center">
+            <Sun className="mr-2" />
+            <h1 className="text-2xl font-bold">Solar Smart Energy</h1>
+          </div>
+          <div className="mr-8 text-xl font-sans font-semibold">
+            <SignedOut>
+              <SignInButton mode="modal" />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </nav>
-      </div>
-    </header>
+      </header>
+    </ClerkProvider>
   );
-};
-
-export default Header;
+}

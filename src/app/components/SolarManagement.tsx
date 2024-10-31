@@ -1,5 +1,6 @@
 "use client";
 
+
 import React, { useEffect, useState } from 'react';
 import { Sun, Battery } from 'lucide-react';
 
@@ -20,9 +21,9 @@ const SolarManagement: React.FC = () => {
       const data = await response.json();
       setCurrentProduction(data.currentProduction);
       setTodaysTotal(data.todaysTotal);
-      setBatteryPercentage(data.batteryPercentage);
+      setBatteryPercentage(data.batteryCurrent / data.batteryMax  * 100);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       // Handle error (optional)
     } finally {
       setLoading(false);
@@ -34,7 +35,7 @@ const SolarManagement: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-xl h-full border border-gray-300">
       <div className="flex items-center mb-4">
         <Sun className="mr-2 text-yellow-500" />
         <h2 className="text-xl font-semibold">Solar Energy Management</h2>

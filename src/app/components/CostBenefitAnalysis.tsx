@@ -24,7 +24,7 @@ const CostBenefitAnalysis: React.FC = () => {
       const data = await response.json();
       setCostBenefitData(data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       // Optionally handle errors here
     } finally {
       setLoading(false);
@@ -36,7 +36,7 @@ const CostBenefitAnalysis: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-xl border border-gray-300">
       <div className="flex items-center mb-4">
         <IndianRupee className="mr-2 text-green-600" />
         <h2 className="text-xl font-semibold">Cost-Benefit Analysis</h2>

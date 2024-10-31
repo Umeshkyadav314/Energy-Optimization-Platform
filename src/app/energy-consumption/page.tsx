@@ -1,7 +1,9 @@
+"use client"
 "use client";
 
 import React, { useEffect, useState } from 'react';
 import { BarChart2 } from 'lucide-react';
+import EnergyConsumption from '../components/EnergyConsumption';
 
 interface ConsumptionData {
   todayUsage: number;
@@ -10,7 +12,7 @@ interface ConsumptionData {
   consumptionChange: number;
 }
 
-const EnergyConsumption: React.FC = () => {
+const TariffMonitorPage = () => {
   const [consumptionData, setConsumptionData] = useState<ConsumptionData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -25,7 +27,7 @@ const EnergyConsumption: React.FC = () => {
       const data = await response.json();
       setConsumptionData(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       // Optionally handle errors here
     } finally {
       setLoading(false);
@@ -35,32 +37,27 @@ const EnergyConsumption: React.FC = () => {
   useEffect(() => {
     fetchConsumptionData();
   }, []);
-
   return (
-    <div className="bg-white p-6 rounded-xl h-full border border-gray-300">
-      <div className="flex items-center mb-4">
-        <BarChart2 className="mr-2 text-blue-600" />
-        <h2 className="text-xl font-semibold">Energy Consumption Analytics</h2>
-      </div>
+    <div className='w-1/2 m-auto h-max bg-white mt-10 p-10 rounded-xl shadow-md'>
+
+      <EnergyConsumption />
+      <div className="bg-white p-6 rounded-xl h-full">
+    
       {loading ? (
         <p className="text-gray-500">Loading energy consumption data...</p>
       ) : (
         <div className="space-y-8">
           <div>
-            <p className="font-medium">Today's Usage:</p>
-            <p className="text-2xl font-bold">{consumptionData?.todayUsage.toFixed(1)} kWh</p>
+            <p className="font-medium">Monthly's Average:</p>
+            <p className="text-2xl font-bold">{consumptionData?.monthlyAverage.toFixed(1)} kWh</p>
           </div>
-          <div>
-            <p className="font-medium">This Week's Average:</p>
-            <p className="text-xl">{consumptionData?.weeklyAverage.toFixed(1)} kWh/day</p>
-          </div>
-          <div className="bg-gray-100 p-3 rounded">
-            <p className="text-sm">Your consumption is {consumptionData?.consumptionChange}% lower than last week. Great job!</p>
-          </div>
+         
+         
         </div>
       )}
+    </div>
     </div>
   );
 };
 
-export default EnergyConsumption;
+export default TariffMonitorPage;

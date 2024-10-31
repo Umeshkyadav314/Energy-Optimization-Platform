@@ -1,9 +1,10 @@
 // src/app/api/scheduling/route.ts
+import { connectToDatabase } from '@/app/db/connect';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  // Dummy scheduling data
-  const schedulingData = {
+  await connectToDatabase(); 
+   const schedulingData = {
     nextScheduledTask: {
       id: 1,
       description: 'Dishwasher',

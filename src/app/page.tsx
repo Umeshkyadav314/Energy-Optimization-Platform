@@ -5,9 +5,9 @@ import SolarManagement from "./components/SolarManagement";
 import Forecasting from "./components/Forecasting";
 import Notifications from "./components/Notifications";
 import CostBenefitAnalysis from "./components/CostBenefitAnalysis";
-import Header from "./components/Header";
-import { SignIn, SignUp } from "@clerk/nextjs"; // Import SignIn and SignUp components
-import { currentUser } from "@clerk/nextjs/server";
+import { SignUp } from "@clerk/nextjs"; // Import SignUp component
+import { currentUser } from "@clerk/nextjs/server"; // Import for server use
+import Card from "./components/Card";
 
 export default async function Home() {
   const user = await currentUser(); // Get the current user
@@ -15,34 +15,51 @@ export default async function Home() {
 
   return (
     <>
-      <div className="bg-gray-800">
-        <Header />
-      </div>
+      
       <main className="container flex mx-auto py-5 flex-row justify-center">
         {isLoggedIn ? (
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-6">
-            <TariffMonitor />
-            <Forecasting />
-            <SolarManagement />
-            <SmartScheduling />
-            <EnergyConsumption />
-            <CostBenefitAnalysis />
-            <Notifications />
-          </div>
+          <ClientComponents />
         ) : (
           <div className="flex flex-col items-center">
-            <>
-              <h2 className="text-3xl mb-4 font-sans bg-blue-500 p-4 rounded-md text-white  font-semibold">
-                Please Sign In or Sign Up
-              </h2>
-              <SignUp routing="hash" />
-            </>
+            <h2 className="text-3xl my-10 font-sans bg-blue-500 p-4 rounded-md text-white font-semibold">
+              Sign In Or Sign Up
+            </h2>
+            <SignUp routing="hash" />
           </div>
         )}
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center text-white bg-gray-700 h-50 p-5">
-        <h3>&copy;2024 All right reserved.</h3>
-      </footer>
+      
     </>
   );
 }
+
+// Client Component
+const ClientComponents = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols- gap-8 my-10 border">
+      <Card link="/tariff-monitor" >
+        <TariffMonitor />
+      </Card>
+      <Card link="/forecasting">
+        <Forecasting />
+      </Card>
+      <Card link="/solar-management">
+        <SolarManagement />
+      </Card>
+      <Card link="/cost-benefit-analysis">
+        <CostBenefitAnalysis />
+      </Card>
+      
+      <Card link="/energy-consumption">
+        <EnergyConsumption />
+      </Card>
+   
+      <Card link="/smart-scheduling">
+        <SmartScheduling />
+      </Card>
+      <Card link="/notifications">
+        <Notifications />
+      </Card>
+    </div>
+  );
+};

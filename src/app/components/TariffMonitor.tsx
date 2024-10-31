@@ -21,7 +21,7 @@ const TariffMonitor: React.FC = () => {
       setCurrentRate(parseFloat(data.currentRate));
       setNextHourForecast(parseFloat(data.nextHourForecast));
     } catch (error) {
-      console.error(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -35,7 +35,7 @@ const TariffMonitor: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-xl border border-gray-300">
       <div className="flex items-center mb-4">
         <Clock className="mr-2 text-blue-600" />
         <h2 className="text-xl font-semibold">Real-Time Tariff Monitor</h2>

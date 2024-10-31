@@ -26,7 +26,7 @@ const SmartScheduling: React.FC = () => {
       setNextTask(data.nextScheduledTask);
       setUpcomingTasks(data.upcomingTasks);
     } catch (error) {
-      console.error(error);
+      console.log(error);
       // Handle error (optional)
     } finally {
       setLoading(false);
@@ -38,7 +38,7 @@ const SmartScheduling: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-xl h-full border border-gray-300">
       <div className="flex items-center mb-4">
         <Calendar className="mr-2 text-blue-600" />
         <h2 className="text-xl font-semibold">Smart Scheduling</h2>

@@ -1,8 +1,8 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Header from "./components/Header";
 import "./styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,12 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider >
-    <html lang="en">
-      <body>
-          <div id="root">{children}</div>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <Header />
+          <div id="root" className="min-h-screen py-10">{children}</div>
+
+          <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center text-white bg-gray-700 h-16 p-5 fixed w-full bottom-0">
+            <h3>&copy;2024 All rights reserved.</h3>
+          </footer>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

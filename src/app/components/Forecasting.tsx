@@ -1,4 +1,3 @@
-// src/app/components/Forecasting.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -21,11 +20,11 @@ const Forecasting: React.FC = () => {
       }
       const data = await response.json();
       setWeather(data.weather);
-      setHighTemp(data.highTemp);
-      setLowTemp(data.lowTemp);
-      setSolarProduction(data.solarProduction);
+      setHighTemp(data.todayHigh);
+      setLowTemp(data.todayLow);
+      setSolarProduction(data.expectedTodayProduction);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -37,7 +36,7 @@ const Forecasting: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 h-full rounded-xl border border-gray-300">
       <div className="flex items-center mb-4">
         <TrendingUp className="mr-2 text-blue-600" />
         <h2 className="text-xl font-semibold">Forecasting</h2>
@@ -47,7 +46,7 @@ const Forecasting: React.FC = () => {
       ) : (
         <div className="space-y-4">
           <div>
-            <p className="font-medium">Tomorrow's Weather:</p>
+            <p className="font-medium">Today's Weather:</p>
             <p className="text-lg">{weather}, High: {highTemp}°C, Low: {lowTemp}°C</p>
           </div>
           <div>
